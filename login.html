@@ -4,135 +4,77 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    		<!--Font -->
-			<link rel="preconnect" href="https://fonts.googleapis.com">
-			<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-			<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">   
+     <link rel="stylesheet" href="css/login_style.css">
     <title>Login</title>
-    <style>
-        html,
-        body {
-            height: 100%;
-        }
-
-        body {
-            display: -ms-flexbox;
-            font-family: "Open Sans", sans-serif;
-            display: flex;
-            -ms-flex-align: center;
-            align-items: center;
-            padding-top: 40px;
-            padding-bottom: 40px;
-            background-color: #bee9bc;
-        }
-
-        .form-signin {
-            width: 100%;
-            max-width: 330px;
-            padding: 15px;
-            margin: auto;
-        }
-
-        .form-signin .checkbox {
-            font-weight: 400;
-        }
-
-        .form-signin .form-control {
-            position: relative;
-            box-sizing: border-box;
-            height: auto;
-            padding: 10px;
-            font-size: 16px;
-        }
-
-        .form-signin .form-control:focus {
-            z-index: 2;
-        }
-
-        .form-signin input[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-
-        .form-signin input[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
-    </style>
 </head>
 
-<body class="text-center">
-    <form class="form-signin" id="loginForm">
-        <img class="mb-4" src="images/fruits/logo-image.png" alt="" width="72"
-            height="72">
-        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-        <label for="inputEmail" class="sr-only">Email address</label>
-        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-        <label for="inputPassword" class="sr-only">Password</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-        <div class="checkbox mb-3">
-            <label>
-                <input type="checkbox" value="remember-me"> Remember me
-            </label>
+<body>
+<!-- Login 5 - Bootstrap Brain Component -->
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-sm-6 col-md-7 intro-section">
+        <div class="intro-content-wrapper">
+          <h1 class="intro-title">Welcome to<br>Fresh Finds </h1>
+          <p class="intro-text">Where Freshness Meets Convenience.</p>
         </div>
-        <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
-        <p class="mt-5 mb-3 text-muted">&copy; 2024</p>
-    </form>
+      </div>
+      <div class="col-sm-6 col-md-5 form-section">
+        <div class="login-wrapper">
+          <h2 class="login-title">Sign in</h2>
+          <form action="#!">
+            <div class="form-group">
+              <label for="email" class="sr-only">Email</label>
+              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            </div>
+            <div class="form-group mb-3">
+              <label for="password" class="sr-only">Password</label>
+              <input type="password" name="password" id="password" class="form-control" placeholder="Password">
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-5">
+              <input name="login" id="login" class="btn login-btn" type="button" value="Login">
+              <a href="#!" class="forgot-password-link">Password?</a>
+            </div>
+          </form>           
+          <p class="login-wrapper-footer-text">Need an account? <a href="#" class="text-reset" id="signupform">Signup here</a></p>
+        </div>
+    <div class="signup-wrapper" style="display:none;">
+        <h2 class="login-title">Sign up</h2>
+        <form action="#!">
+            <div class="form-group">
+                <label for="username" class="sr-only">Username</label>
+                <input type="text" class="form-control" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <label for="email" class="sr-only">Email</label>
+                <input type="email" class="form-control" id="signupEmail" placeholder="Email">
+            </div>
+            <div class="form-group">
+                <label for="signupPassword" class="sr-only">Password</label>
+                <input type="password" class="form-control" id="signupPassword" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" class="sr-only">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+            </div>
+            <div>
+                <input name="signup" id="signup" class="btn login-btn" type="button" value="Sign up">
+            </div>
+        </form>           
+        <p class="login-wrapper-footer-text">Have an account? <a href="#!" class="text-reset" id="showLogin">Login here</a></p>
+    </div>
 
-    <!-- Include jQuery and Bootstrap JS -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            var db;
-            var request = window.indexedDB.open("FreshFindsDB", 1);
-
-            request.onerror = function (event) {
-                console.error("Database error: " + event.target.errorCode);
-            };
-
-            request.onupgradeneeded = function (event) {
-                db = event.target.result;
-                var objectStore = db.createObjectStore("users", { keyPath: "id", autoIncrement: true });
-                objectStore.createIndex("email", "email", { unique: true });
-            };
-
-            request.onsuccess = function (event) {
-                db = event.target.result;
-
-                $('#loginForm').on('submit', function (e) {
-                    e.preventDefault();
-                    var transaction = db.transaction(["users"], "readwrite");
-                    var objectStore = transaction.objectStore("users");
-                    var user = {
-                        email: $('#inputEmail').val(),
-                        password: $('#inputPassword').val()
-                    };
-                    var request = objectStore.add(user);
-                    request.onsuccess = function (event) {
-                        let isValidLogin = true;
-                        if (isValidLogin) {
-                            // Set the "currentlyLoggedIn" state to true in localStorage or IndexedDB
-                            // For example, using localStorage:
-                            localStorage.setItem('currentlyLoggedIn', true);
-
-                            // Redirect the user to the home page or any other authenticated page
-                            window.location.href = 'index.html'; // Replace 'index.html' with the actual authenticated page
-                        } else {
-                            // Handle invalid login
-                            alert('Please try again.');
-                        }
-                    };
-                    request.onerror = function (event) {
-                        alert("Unable to add data\r\n" + $('#inputEmail').val() + " is already in your database! ");
-                    }
-                });
-            };
-        });
-    </script>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/login.js"></script>
 </body>
-
 </html>

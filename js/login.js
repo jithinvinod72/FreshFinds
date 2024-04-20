@@ -1,41 +1,90 @@
-$(document).ready(function() {
-    // Open (or create) the database
-    var open = indexedDB.open('UserDatabase', 1);
+$(document).ready(function () {
+    // Toggle to Signup Form
+    $("#signupform").click(function (e) {
+        e.preventDefault();
+        $(".login-wrapper").hide();
+        $(".signup-wrapper").show();
+    });
 
-    // Create the schema
-    open.onupgradeneeded = function() {
-        var db = open.result;
-        var store = db.createObjectStore('UserStore', {keyPath: 'id', autoIncrement: true});
-        store.createIndex('emailIndex', 'email', {unique: true});
+    // Toggle back to Login Form
+    $("#showLogin").click(function (e) {
+        e.preventDefault();
+        $(".signup-wrapper").hide();
+        $(".login-wrapper").show();
+    });
+
+    // IndexedDB Setup
+    let db;
+    const request = indexedDB.open("FreshFindsDB", 1);
+    request.onupgradeneeded = function(event) {
+        db = event.target.result;
+        if (!db.objectStoreNames.contains('users')) {
+            db.createObjectStore('users', { keyPath: 'email' });
+        }
+    };
+    request.onsuccess = function(event) {
+        db = event.target.result;
+    };
+    request.onerror = function(event) {
+        console.error('Database error:', event.target.error.message);
     };
 
-    open.onsuccess = function() {
-        // Start a new transaction
-        var db = open.result;
-        var tx = db.transaction('UserStore', 'readwrite');
-        var store = tx.objectStore('UserStore');
+    // Handling Signup
+    $('#signup').click(function(e) {
+        e.preventDefault();
+        const username = $('#username').val();
+        const email = $('#signupEmail').val().trim().toLowerCase();
+        const password = $('#signupPassword').val();
+        const confirmPassword = $('#confirmPassword').val();
 
-        // Add submit event listener to the form
-        $('#loginForm').submit(function(e) {
-            e.preventDefault();
-            var email = $(this).find('input[name="email"]').val();
-            var password = $(this).find('input[name="password"]').val();
+        if (password !== confirmPassword) {
+            alert('Passwords do not match!');
+            return;
+        }
 
-            // Save the user's data
-            var userData = { email: email, password: password };
-            store.put(userData);
+        const user = { username, email, password };
+        const transaction = db.transaction(['users'], 'readwrite');
+        transaction.onerror = function(event) {
+            console.error("Transaction error:", event.target.error.message);
+        };
+        const objectStore = transaction.objectStore('users');
+        const addRequest = objectStore.add(user);
 
-            // Close the db when the transaction is done
-            tx.oncomplete = function() {
-                db.close();
-            };
+        addRequest.onsuccess = function() {
+            localStorage.setItem('username', username);
+            localStorage.setItem('isLoggedIn', 'true');
+            alert('Signup successful!');
+            window.location.href = '/index.html'; 
+        };
+        addRequest.onerror = function(e) {
+            alert('Signup failed: ' + e.target.error.message);
+        };
+    });
 
-            // Provide a simple login feedback
-            alert('Login information saved!');
-        });
-    };
+    // Login functionality
+    $('#login').click(function(e) {
+        e.preventDefault();
+        const email = $('#exampleInputEmail1').val().trim().toLowerCase();
+        const password = $('#password').val();
 
-    open.onerror = function() {
-        console.error("Error", open.error);
-    };
+        const transaction = db.transaction(['users'], 'readonly');
+        const objectStore = transaction.objectStore('users');
+        const request = objectStore.get(email);
+
+        request.onsuccess = function(event) {
+            const user = request.result;
+            if (user && user.password === password) {
+                localStorage.setItem('username', user.email);
+                localStorage.setItem('isLoggedIn', 'true');
+                alert('Login successful!');
+                window.location.href = '/index.html'; 
+            } else {
+                alert('Login failed: Check your email or password.');
+            }
+        };
+        request.onerror = function(e) {
+            console.error('Error fetching user:', e.target.error.message);
+            alert('Login failed: Unable to access the database.');
+        };
+    });
 });
