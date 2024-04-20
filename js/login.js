@@ -54,7 +54,7 @@ $(document).ready(function () {
             localStorage.setItem('username', username);
             localStorage.setItem('isLoggedIn', 'true');
             alert('Signup successful!');
-            window.location.href = '/index.html'; 
+            window.location.href = 'index.html'; 
         };
         addRequest.onerror = function(e) {
             alert('Signup failed: ' + e.target.error.message);
@@ -77,7 +77,7 @@ $(document).ready(function () {
                 localStorage.setItem('username', user.email);
                 localStorage.setItem('isLoggedIn', 'true');
                 alert('Login successful!');
-                window.location.href = '/index.html'; 
+                window.location.href = 'index.html'; 
             } else {
                 alert('Login failed: Check your email or password.');
             }

@@ -145,6 +145,7 @@ $(document).ready(function() {
             localStorage.removeItem('isLoggedIn');
             localStorage.removeItem('userEmail');
             window.location.href = 'index.html';
+            alert("Logged out successfully");
         });
     };
 
