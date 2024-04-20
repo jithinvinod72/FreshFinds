@@ -120,7 +120,7 @@ $(document).ready(function() {
         $(document).on('click', '.increase, .decrease', function() {
             var $input = $(this).closest('.quantity-container').find('.quantity-amount');
             var currentQuantity = parseInt($input.val(), 10);
-            var newQuantity = $(this).hasClass('increase') ? currentQuantity + 1 : currentQuantity - 1;
+            var newQuantity = $(this).hasClass('decrease') ? currentQuantity - 1 : currentQuantity + 1;
             newQuantity = newQuantity > 0 ? newQuantity : 1;  // Prevent quantity from going below 1
 
             var name = $(this).closest('tr').find('.product-name').text();
