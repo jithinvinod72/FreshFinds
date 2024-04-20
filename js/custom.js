@@ -82,14 +82,14 @@ $(document).ready(function() {
         $table.empty();
 
         if (cart.length === 0) {
-            $table.append('<tr><td colspan="6">No products in cart</td></tr>');
+            $table.append('<tr><td colspan="5">No products in cart</td></tr>');
         } else {
             cart.forEach(function(item) {
                 var $row = $('<tr>').append(
-                    $('<td class="product-thumbnail">').append('<img src="path_to_image" alt="Image" class="img-fluid">'),
+                    
                     $('<td class="product-name">').text(item.name),
                     $('<td>').text('$' + item.price),
-                    $('<td>').append(
+                    $('<td class="d-flex justify-content-around">').append(
                         $('<div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">').append(
                             $('<div class="input-group-prepend">').append(
                                 $('<button class="btn btn-outline-black decrease" type="button">').text('−')
