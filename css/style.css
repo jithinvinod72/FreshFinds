@@ -13,6 +13,11 @@ body {
   background-color: #eff2f1;
 }
 
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
 a {
   text-decoration: none;
   -webkit-transition: .3s all ease;
@@ -138,7 +143,7 @@ a.more {
   align-items: center;
   height: 100vh; /* Adjust the height as needed */
   text-align: center;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box; /* Ensures padding doesn't affect overall dimensions */
 }
 

@@ -48,15 +48,18 @@
 					<li>
 						<a class="nav-link" href="index.html">Home</a>
 					</li>
-					<li><a class="nav-link" href="shop.html">Shop</a></li>
 					<li><a class="nav-link" href="about.html">About us</a></li>
 					<li><a class="nav-link" href="services.html">Services</a></li>
 					<li><a class="nav-link" href="blog.html">Blog</a></li>
 					<li class="nav-item active"><a class="nav-link" href="contact.html">Contact us</a></li>
+					<li><a class="nav-link" href="shop.html">Shop</a></li>
+
 				</ul>
 
 				<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
 					<li><a class="nav-link" href="#"><img src="images/user.svg"></a></li>
+					<li><a class="nav-link" href="#" id="logout-icon"><i class="fa fa-sign-out link-light"
+						aria-hidden="true"></i></a></li>
 					<li><a class="nav-link" href="cart.html"><img src="images/cart.svg"></a></li>
 				</ul>
 			</div>
@@ -72,8 +75,8 @@
 			<h6 class="mb-4 text-light opacity-75">Welcome to freshFinds, your premier destination for fresh and organic
 				groceries</h6>
 			<p>
-				<a href="#" class="btn btn-secondary me-2">Shop Now</a>
-				<a href="#" class="btn btn-white-outline">Explore</a>
+				<a href="shop.html" class="btn btn-secondary me-2">Shop Now</a>
+				<a href="about.html" class="btn btn-white-outline">Explore</a>
 			</p>
 		</div>
 	</div>
@@ -168,12 +171,13 @@
 		<!-- Start Footer Section -->
 		<footer class="footer-section">
 			<div class="container relative">
-		
+	
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="subscription-form">
 							<h3 class="d-flex align-items-center">
-								<span class="me-1"><img src="images/envelope-outline.svg" alt="Subscribe Icon" class="img-fluid"></span>
+								<span class="me-1"><img src="images/envelope-outline.svg" alt="Subscribe Icon"
+										class="img-fluid"></span>
 								<span>Subscribe to Our Newsletter</span>
 							</h3>
 							<form action="#" class="row g-3">
@@ -192,14 +196,15 @@
 						</div>
 					</div>
 				</div>
-		
+	
 				<div class="row g-5 mb-5">
 					<div class="col-lg-4">
 						<div class="mb-4 footer-logo-wrap">
 							<a href="#" class="footer-logo">freshFinds<span>.</span></a>
 						</div>
-						<p class="mb-4">Explore our selection of fresh produce, organic foods, and sustainable products designed to support your healthy lifestyle. Join our community!</p>
-		
+						<p class="mb-4">Explore our selection of fresh produce, organic foods, and sustainable products
+							designed to support your healthy lifestyle. Join our community!</p>
+	
 						<ul class="list-unstyled custom-social">
 							<li><a href="#"><span class="fa fa-brands fa-facebook-f"></span></a></li>
 							<li><a href="#"><span class="fa fa-brands fa-twitter"></span></a></li>
@@ -207,62 +212,33 @@
 							<li><a href="#"><span class="fa fa-brands fa-linkedin"></span></a></li>
 						</ul>
 					</div>
-		
+	
 					<div class="col-lg-8">
 						<div class="row links-wrap">
 							<div class="col-6 col-sm-6 col-md-3">
 								<ul class="list-unstyled">
-									<li><a href="#">About Us</a></li>
-									<li><a href="#">Our Products</a></li>
-									<li><a href="#">Recipes</a></li>
-									<li><a href="#">Contact Us</a></li>
-								</ul>
-							</div>
-		
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Support</a></li>
-									<li><a href="#">FAQ</a></li>
-									<li><a href="#">Live Chat</a></li>
-								</ul>
-							</div>
-		
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Careers</a></li>
-									<li><a href="#">Our Team</a></li>
-									<li><a href="#">Privacy Policy</a></li>
-								</ul>
-							</div>
-		
-							<div class="col-6 col-sm-6 col-md-3">
-								<ul class="list-unstyled">
-									<li><a href="#">Seasonal Specials</a></li>
-									<li><a href="#">New Arrivals</a></li>
-									<li><a href="#">Best Sellers</a></li>
+									<li><a href="about.html">About Us</a></li>
+									<li><a href="shop.html">Shop</a></li>
+									<li><a href="cart.html">Cart</a></li>
+									<li><a href="contact.html">Contact Us</a></li>
 								</ul>
 							</div>
 						</div>
 					</div>
 				</div>
-		
+	
 				<div class="border-top copyright">
 					<div class="row pt-4">
 						<div class="col-lg-6">
 							<p class="mb-2 text-center text-lg-start">
-								Copyright &copy;<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash; Designed by Team OMKV</p>
+								Copyright &copy;
+								<script>document.write(new Date().getFullYear());</script>. All Rights Reserved. &mdash;
+								Designed by Team OMKV
+							</p>
 						</div>
-		
-						<div class="col-lg-6 text-center text-lg-end">
-							<ul class="list-unstyled d-inline-flex ms-auto">
-								<li class="me-4"><a href="#">Terms & Conditions</a></li>
-								<li><a href="#">Privacy Policy</a></li>
-							</ul>
-						</div>
-		
 					</div>
 				</div>
-		
+	
 			</div>
 		</footer>
 		<!-- End Footer Section -->	
@@ -271,7 +247,9 @@
 		integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
 		crossorigin="anonymous"></script>
 	<script src="js/tiny-slider.js"></script>
-	<script src="js/custom.js"></script>
-</body>
+    <!-- jQuery CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <!-- Custom JS file -->
+    <script src="js/custom.js"></script></body>
 
 </html>
