@@ -1,9 +1,10 @@
 $(document).ready(function() {
     'use strict';
 
-    var tinyslider = function() {
+    // Initialize the testimonial slider
+    var initTinySlider = function() {
         if ($('.testimonial-slider').length) {
-            var slider = tns({
+            tns({
                 container: '.testimonial-slider',
                 items: 1,
                 axis: "horizontal",
@@ -19,140 +20,144 @@ $(document).ready(function() {
             });
         }
     };
-    tinyslider();
-
-    // Function to add item to cart
-    $('.add-to-cart').click(function() {
-        var name = $(this).data('name');
-        var price = $(this).data('price');
-        var cart = JSON.parse(localStorage.getItem('cart')) || [];
-        var found = false;
-
-        // Check if the product is already in the cart
-        cart.forEach(function(item) {
-            if (item.name === name) {
-                item.quantity++;
-                found = true;
-            }
-        });
-
-        if (!found) {
-            cart.push({ name: name, price: price, quantity: 1 });
-        }
-
-        // Update localStorage
-        localStorage.setItem('cart', JSON.stringify(cart));
-        alert(name + " added to cart.");
-    });
-
-	$(document).on('click', '.remove-item', function() {
-		var nameToRemove = $(this).data('name');
-		var cart = JSON.parse(localStorage.getItem('cart')) || [];
-	
-		// Filter out the item to be removed
-		cart = cart.filter(item => item.name !== nameToRemove);
-	
-		// Update the cart in localStorage
-		localStorage.setItem('cart', JSON.stringify(cart));
-	
-		// Update the cart display
-		displayCart();
-		updateCartTotal(); // Make sure this function is defined to update the total
-	});
-
-    // Function to display cart items on the cart page
-    if (window.location.pathname.endsWith('cart.html')) {
-        displayCart();
-    } 
-
-	function displayCart() {
-		var cart = JSON.parse(localStorage.getItem('cart')) || [];
-		var $table = $('.site-blocks-table tbody');
-		$table.empty();
-	
-		if (cart.length === 0) {
-			$table.append('<tr><td colspan="6">No products in cart</td></tr>');
-		} else {
-			cart.forEach(function(item, index) {
-				$table.append('<tr>' +
-					'<td class="product-thumbnail"><img src="path_to_image" alt="Image" class="img-fluid"></td>' +
-					'<td class="product-name">' + item.name + '</td>' +
-					'<td>$' + item.price + '</td>' +
-					'<td>' +
-					'<div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">' +
-					'<div class="input-group-prepend">' +
-					'<button class="btn btn-outline-black decrease" type="button">&minus;</button>' +
-					'</div>' +
-					'<input type="text" class="form-control text-center quantity-amount" value="' + item.quantity + '" readonly>' +
-					'<div class="input-group-append">' +
-					'<button class="btn btn-outline-black increase" type="button">&plus;</button>' +
-					'</div>' +
-					'</div>' +
-					'</td>' +
-					'<td>$' + (item.price * item.quantity).toFixed(2) + '</td>' +
-					'<td><button class="btn btn-black btn-sm remove-item" data-name="' + item.name + '">X</button></td>' +
-					'</tr>');
-			});
-		}
-	}
-
-	function updateCartTotal() {
-		var cart = JSON.parse(localStorage.getItem('cart')) || [];
-		var total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
-		$('#cart-total').text('$' + total.toFixed(2));
-	}
-	  
-	  // Call updateCartTotal wherever needed to ensure the total updates appropriately
-	  $('.add-to-cart').click(function() {
-		// existing add to cart logic...
-		updateCartTotal();
-	  });
-	  
-	  $(document).on('click', '.increase, .decrease, .remove-item', function() {
-		// Adjust quantity or remove item logic...
-		updateCartTotal();
-	  });
-	  
-	  // On initial load
-	  updateCartTotal();
-	  
-      var logoutIcon = document.getElementById('logout-icon');
-	  logoutIcon.addEventListener('click', function(event) {
-        event.preventDefault(); // Prevent default anchor click behavior
-
-        // Implement logout logic here
-        localStorage.removeItem('currentlyLoggedIn');  // Assuming you use localStorage for session tracking
-        localStorage.removeItem('userEmail'); // Clear user email or any other stored user data
-
-        // Optionally, inform your server about the logout for server-side session invalidation
-        // This can be done with a fetch/AJAX request if needed (omitted here for simplicity)
-
-        // Redirect to the login page or home page after logout
-        window.location.href = 'index.html'; // Modify as necessary for your site's URL structure
-    });
-
-	updateProfileIcon();
 
     function updateProfileIcon() {
-        var isLoggedIn = localStorage.getItem('currentlyLoggedIn');
-        var profileIcon = document.getElementById('profile-icon');
-        
+        var isLoggedIn = localStorage.getItem('isLoggedIn');
+        var profileIcon = $('#profile-icon');
+        let logout = $('#logout-icon');
         if (isLoggedIn) {
-            // Disable the profile icon
-            profileIcon.classList.add('disabled');
-            profileIcon.href = "#";  // Removing any actionable link
-            profileIcon.onclick = function() { return false; };  // Preventing default action
+            profileIcon.addClass('disabled');            
         } else {
-            // Enable the profile icon if needed
-            profileIcon.classList.remove('disabled');
-            profileIcon.href = "login.html";  // Link to the login page
-            profileIcon.onclick = null;  // Removing the onclick handler
+            profileIcon.removeClass('disabled');
+            logout.removeClass('disabled');
+            profileIcon.attr('href', "login.html"); // Ensure it links to the login page if not logged in
         }
     }
-    
-    window.checkLogin = function() {
-        // Prevent the link from being followed if logged in
-        return !localStorage.getItem('currentlyLoggedIn');
+    // Call updateProfileIcon to set up the icon link correctly
+    updateProfileIcon();
+
+    // Add item to cart functionality
+    var addToCart = function() {
+        $('.add-to-cart').click(function() {
+            var name = $(this).data('name');
+            var price = $(this).data('price');
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            var found = false;
+
+            cart.forEach(function(item) {
+                if (item.name === name) {
+                    item.quantity++;
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                cart.push({ name: name, price: price, quantity: 1 });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartTotal();
+            alert(name + " added to cart.");
+        });
     };
-	  
+
+    // Remove item from cart functionality
+    var removeFromCart = function() {
+        $(document).on('click', '.remove-item', function() {
+            var nameToRemove = $(this).data('name');
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            cart = cart.filter(item => item.name !== nameToRemove);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCart();
+            updateCartTotal();
+        });
+    };
+
+    // Function to display cart items on the cart page
+    var displayCart = function() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var $table = $('.site-blocks-table tbody');
+        $table.empty();
+
+        if (cart.length === 0) {
+            $table.append('<tr><td colspan="5">No products in cart</td></tr>');
+        } else {
+            cart.forEach(function(item) {
+                var $row = $('<tr>').append(
+                    
+                    $('<td class="product-name">').text(item.name),
+                    $('<td>').text('$' + item.price),
+                    $('<td class="d-flex justify-content-around">').append(
+                        $('<div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">').append(
+                            $('<div class="input-group-prepend">').append(
+                                $('<button class="btn btn-outline-black decrease" type="button">').text('−')
+                            ),
+                            $('<input type="text" class="form-control text-center quantity-amount" readonly>').val(item.quantity),
+                            $('<div class="input-group-append">').append(
+                                $('<button class="btn btn-outline-black increase" type="button">').text('+')
+                            )
+                        )
+                    ),
+                    $('<td>').text('$' + (item.price * item.quantity).toFixed(2)),
+                    $('<td>').append($('<button class="btn btn-black btn-sm remove-item" data-name="' + item.name + '">').text('X'))
+                );
+                $table.append($row);
+            });
+        }
+    };
+
+    // Function to update the total cost of the cart
+    var updateCartTotal = function() {
+        var cart = JSON.parse(localStorage.getItem('cart')) || [];
+        var total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
+        $('#cart-total').text('$' + total.toFixed(2));
+    };
+
+    // Quantity update handlers
+    var setupQuantityUpdateHandlers = function() {
+        $(document).on('click', '.increase, .decrease', function() {
+            var $input = $(this).closest('.quantity-container').find('.quantity-amount');
+            var currentQuantity = parseInt($input.val(), 10);
+            var newQuantity = $(this).hasClass('decrease') ? currentQuantity - 1 : currentQuantity + 1;
+            newQuantity = newQuantity > 0 ? newQuantity : 1;  // Prevent quantity from going below 1
+
+            var name = $(this).closest('tr').find('.product-name').text();
+            var cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.forEach(function(item) {
+                if (item.name === name) {
+                    item.quantity = newQuantity;
+                }
+            });
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            $input.val(newQuantity);
+            displayCart();
+            updateCartTotal();
+        });
+    };
+
+    // Logout functionality
+    var setupLogout = function() {
+        $('#logout-icon').click(function(event) {
+            event.preventDefault();
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('userEmail');
+            window.location.href = 'index.html';
+            alert("Logged out successfully");
+        });
+    };
+
+    // Initial calls
+    initTinySlider();
+    addToCart();
+    removeFromCart();
+    setupQuantityUpdateHandlers();
+    setupLogout();
+
+    if (window.location.pathname.endsWith('cart.html')) {
+        displayCart();
+        updateCartTotal();
+    }
 });
